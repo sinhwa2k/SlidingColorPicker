@@ -1,0 +1,4 @@
+# SlidingColorPicker
+SlidingColorPicker
+
+picker
