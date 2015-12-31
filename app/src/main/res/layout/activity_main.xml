@@ -11,11 +11,13 @@
     tools:context=".sample.MainActivity">
 
     <TextView
+        android:id="@+id/MainActivity_tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sinhwa2k@gmail.com" />
 
     <com.sinhwa2k.slidingcolorpicker.ColorPickerView
+        android:id="@+id/MainActivity_cpv"
         android:layout_width="wrap_content"
         android:layout_height="100dp" />
 </LinearLayout>

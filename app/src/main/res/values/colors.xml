@@ -4,19 +4,19 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="Timetable.Color0">#f9552e</color>
-    <color name="Timetable.Color1">#ff7800</color>
-    <color name="Timetable.Color2">#ffb400</color>
-    <color name="Timetable.Color3">#6cd128</color>
-    <color name="Timetable.Color4">#07b017</color>
-    <color name="Timetable.Color5">#00b37e</color>
-    <color name="Timetable.Color6">#33cccc</color>
-    <color name="Timetable.Color7">#0066ff</color>
-    <color name="Timetable.Color8">#0c74a5</color>
-    <color name="Timetable.Color9">#6075de</color>
-    <color name="Timetable.Color10">#ce5bf5</color>
-    <color name="Timetable.Color11">#9e37e3</color>
-    <color name="Timetable.Color12">#fa53a7</color>
-    <color name="Timetable.Color13">#9a8170</color>
-    <color name="Timetable.Color14">#996600</color>
+    <color name="color0">#f9552e</color>
+    <color name="color1">#ff7800</color>
+    <color name="color2">#ffb400</color>
+    <color name="color3">#6cd128</color>
+    <color name="color4">#07b017</color>
+    <color name="color5">#00b37e</color>
+    <color name="color6">#33cccc</color>
+    <color name="color7">#0066ff</color>
+    <color name="color8">#0c74a5</color>
+    <color name="color9">#6075de</color>
+    <color name="color10">#ce5bf5</color>
+    <color name="color11">#9e37e3</color>
+    <color name="color12">#fa53a7</color>
+    <color name="color13">#9a8170</color>
+    <color name="color14">#996600</color>
 </resources>

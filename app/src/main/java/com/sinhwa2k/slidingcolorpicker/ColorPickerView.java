@@ -13,8 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 
-import com.sinhwa2k.slidingcolorpicker.R;
-
 import java.util.ArrayList;
 
 
@@ -78,7 +76,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	public void setOnColorChange(OnColorChange onColorChange) {
 		this.onColorChange = onColorChange;
-		onColorChange.changeColor(centerIdx);
+		onColorChange.changeColor(arPaintColor.get(centerIdx).getColor());
 	}
 
 	@Override
@@ -132,21 +130,21 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 		arPaintColor = new ArrayList<Paint>();
 		arPaintColorAlpha10 = new ArrayList<Paint>();
-		addColor(R.color.Timetable_Color0);
-		addColor(R.color.Timetable_Color1);
-		addColor(R.color.Timetable_Color2);
-		addColor(R.color.Timetable_Color3);
-		addColor(R.color.Timetable_Color4);
-		addColor(R.color.Timetable_Color5);
-		addColor(R.color.Timetable_Color6);
-		addColor(R.color.Timetable_Color7);
-		addColor(R.color.Timetable_Color8);
-		addColor(R.color.Timetable_Color9);
-		addColor(R.color.Timetable_Color10);
-		addColor(R.color.Timetable_Color11);
-		addColor(R.color.Timetable_Color12);
-		addColor(R.color.Timetable_Color13);
-		addColor(R.color.Timetable_Color14);
+		addColor(R.color.color0);
+		addColor(R.color.color1);
+		addColor(R.color.color2);
+		addColor(R.color.color3);
+		addColor(R.color.color4);
+		addColor(R.color.color5);
+		addColor(R.color.color6);
+		addColor(R.color.color7);
+		addColor(R.color.color8);
+		addColor(R.color.color9);
+		addColor(R.color.color10);
+		addColor(R.color.color11);
+		addColor(R.color.color12);
+		addColor(R.color.color13);
+		addColor(R.color.color14);
 
 		colorRect =  new Rect();
 		//colorRectTop =  new Rect();
@@ -243,7 +241,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 		}
 
 		if(onColorChange != null)
-			onColorChange.changeColor(centerIdx);
+			onColorChange.changeColor(arPaintColor.get(centerIdx).getColor());
 	}
 
 	@Override
