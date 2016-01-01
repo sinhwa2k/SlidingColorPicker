@@ -61,6 +61,8 @@ public class ColorPickerView extends View implements OnGestureListener {
     Rect leftRect;
     Rect rightRect;
 
+	int colorAlpha;
+
 	public ColorPickerView(Context context, AttributeSet attrs, int defStyle ) {
 		super( context, attrs, defStyle );
 		init( context, attrs, defStyle );
@@ -113,6 +115,8 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	private void init(Context context, AttributeSet attrs, int defStyle) {
 
+		colorAlpha =  context.obtainStyledAttributes( attrs, R.styleable.SlidingColorPicker ).getInt( R.styleable.SlidingColorPicker_color_alpha, 255);
+
         bitmapLeft = BitmapFactory.decodeResource(getResources(), R.mipmap.picker_ic_left);
         bitmapRight = BitmapFactory.decodeResource(getResources(), R.mipmap.picker_ic_right);
         leftRect = new Rect();
@@ -160,7 +164,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 		p = new Paint();
 		p.setColor(Color.parseColor(color));
-		p.setAlpha(25);
+		p.setAlpha(colorAlpha);
 		arPaintColorAlpha10.add(p);
 	}
 

@@ -17,7 +17,9 @@
         android:text="sinhwa2k@gmail.com" />
 
     <com.sinhwa2k.slidingcolorpicker.ColorPickerView
+        xmlns:sinhwa2k="http://schemas.android.com/apk/res/com.sinhwa2k.slidingcolorpicker"
         android:id="@+id/MainActivity_cpv"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        sinhwa2k:color_alpha="50" />
 </LinearLayout>
