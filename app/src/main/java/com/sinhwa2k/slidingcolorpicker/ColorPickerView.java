@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -92,10 +93,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 		colorDx = colorHalfW;
 
-
 		colorRect.set(0, 0, (int)colorW+1, colorH);
-		//colorRectTop.set(0, 0, (int)colorW+1, colorH/15);
-        //26 88
 
         leftRect.set(0, hegiht/2 - 44, 26, hegiht/2 + 44);
         rightRect.set(width - 26, hegiht/2 - 44, width, hegiht/2 + 44);
@@ -126,28 +124,27 @@ public class ColorPickerView extends View implements OnGestureListener {
 		paintCenter = new Paint();
 		paintCenter.setColor(getResources().getColor(android.R.color.black));
 		paintCenter.setStrokeWidth(4);
-		//paintCenter.setAlpha(50);
 
 		arPaintColor = new ArrayList<Paint>();
 		arPaintColorAlpha10 = new ArrayList<Paint>();
-		addColor(R.color.color0);
-		addColor(R.color.color1);
-		addColor(R.color.color2);
-		addColor(R.color.color3);
-		addColor(R.color.color4);
-		addColor(R.color.color5);
-		addColor(R.color.color6);
-		addColor(R.color.color7);
-		addColor(R.color.color8);
-		addColor(R.color.color9);
-		addColor(R.color.color10);
-		addColor(R.color.color11);
-		addColor(R.color.color12);
-		addColor(R.color.color13);
-		addColor(R.color.color14);
+	
+		addColor("#f9552e");
+		addColor("#ff7800");
+		addColor("#ffb400");
+		addColor("#6cd128");
+		addColor("#07b017");
+		addColor("#00b37e");
+		addColor("#33cccc");
+		addColor("#0066ff");
+		addColor("#0c74a5");
+		addColor("#6075de");
+		addColor("#ce5bf5");
+		addColor("#9e37e3");
+		addColor("#fa53a7");
+		addColor("#9a8170");
+		addColor("#996600");
 
 		colorRect =  new Rect();
-		//colorRectTop =  new Rect();
 
 		mGestureDetector = new GestureDetector( context, this );
 		mGestureDetector.setIsLongpressEnabled( false );
@@ -156,13 +153,13 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	}
 
-	private void addColor(int id) {
+	private void addColor(String color) {
 		Paint p = new Paint();
-		p.setColor(getResources().getColor(id));
+		p.setColor(Color.parseColor(color));
 		arPaintColor.add(p);
 
 		p = new Paint();
-		p.setColor(getResources().getColor(id));
+		p.setColor(Color.parseColor(color));
 		p.setAlpha(25);
 		arPaintColorAlpha10.add(p);
 	}
@@ -274,7 +271,9 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 
 
-		if(startGoCenter || doGoCenter) invalidate();
+		if(startGoCenter || doGoCenter) {
+			invalidate();
+		}
 	}
 
 
