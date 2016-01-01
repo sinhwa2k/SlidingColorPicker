@@ -47,7 +47,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 	float colorHalfW;
 	int colorH;
 	int width;
-	int hegiht;
+	int height;
 	int centerX;
 
 	boolean startGoCenter = false;
@@ -87,18 +87,18 @@ public class ColorPickerView extends View implements OnGestureListener {
 		super.onLayout( changed, left, top, right, bottom );
 
 		width = right - left;
-		hegiht = bottom - top;
+		height = bottom - top;
 
 		colorW = width / (float)showColorCount;
 		colorHalfW = colorW / 2;
-		colorH = hegiht;
+		colorH = height;
 
 		colorDx = colorHalfW;
 
 		colorRect.set(0, 0, (int)colorW+1, colorH);
 
-        leftRect.set(0, hegiht/2 - 44, 26, hegiht/2 + 44);
-        rightRect.set(width - 26, hegiht/2 - 44, width, hegiht/2 + 44);
+        leftRect.set(0, height /2 - 44, 26, height /2 + 44);
+        rightRect.set(width - 26, height /2 - 44, width, height /2 + 44);
 
 		moveLeft = (colorW) * 5;
 		centerX = width/2;
@@ -269,7 +269,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 		}
 
 		canvas.restore();
-		canvas.drawLine(centerX, 0, centerX, hegiht, paintCenter);
+		canvas.drawLine(centerX, 0, centerX, height, paintCenter);
         canvas.drawBitmap(bitmapLeft, null, leftRect, null);
         canvas.drawBitmap(bitmapRight, null, rightRect, null);
 
