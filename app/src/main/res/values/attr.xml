@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SlidingColorPicker">
+    <declare-styleable name="ColorPickerView">
         <attr name="color_alpha" format="integer" />
     </declare-styleable>
 </resources>
