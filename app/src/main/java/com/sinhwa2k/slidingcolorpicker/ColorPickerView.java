@@ -57,11 +57,11 @@ public class ColorPickerView extends View implements OnGestureListener {
     Bitmap bitmapRight;
 
 	Rect colorRect;
-	//Rect colorRectTop;
     Rect leftRect;
     Rect rightRect;
 
 	int colorAlpha;
+	boolean visibleArrow;
 
 	public ColorPickerView(Context context, AttributeSet attrs, int defStyle ) {
 		super( context, attrs, defStyle );
@@ -116,7 +116,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 	private void init(Context context, AttributeSet attrs, int defStyle) {
 
 		colorAlpha =  context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getInt( R.styleable.ColorPickerView_color_alpha, 255);
-
+		visibleArrow = context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getBoolean( R.styleable.ColorPickerView_visible_arrow, true);
         bitmapLeft = BitmapFactory.decodeResource(getResources(), R.mipmap.picker_ic_left);
         bitmapRight = BitmapFactory.decodeResource(getResources(), R.mipmap.picker_ic_right);
         leftRect = new Rect();
@@ -258,21 +258,21 @@ public class ColorPickerView extends View implements OnGestureListener {
 		//스크롤 이동
 		canvas.translate(-dX - moveLeft, 0);
 
-		//canvas.drawRect(colorRectTop, arPaintColor.get(startIdx));
 		canvas.drawRect(colorRect, arPaintColorAlpha10.get(startIdx));
 
 		for(int i = 0; i < colorCount - 1; i ++) {
 			int idx = (startIdx + 1 + i) % colorCount;
 			canvas.translate(colorW, 0);
-			//canvas.drawRect(colorRectTop, arPaintColor.get(idx));
 			canvas.drawRect(colorRect, arPaintColorAlpha10.get(idx));
 		}
 
 		canvas.restore();
 		canvas.drawLine(centerX, 0, centerX, height, paintCenter);
-        canvas.drawBitmap(bitmapLeft, null, leftRect, null);
-        canvas.drawBitmap(bitmapRight, null, rightRect, null);
 
+		if(visibleArrow) {
+			canvas.drawBitmap(bitmapLeft, null, leftRect, null);
+			canvas.drawBitmap(bitmapRight, null, rightRect, null);
+		}
 
 
 		if(startGoCenter || doGoCenter) {

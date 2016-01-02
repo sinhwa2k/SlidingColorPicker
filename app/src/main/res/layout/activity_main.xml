@@ -21,5 +21,6 @@
         android:id="@+id/MainActivity_cpv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        sinhwa2k:color_alpha="50" />
+        sinhwa2k:color_alpha="100"
+        sinhwa2k:visible_arrow="true"/>
 </LinearLayout>
