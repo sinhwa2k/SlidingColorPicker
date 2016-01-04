@@ -3,5 +3,6 @@
     <declare-styleable name="ColorPickerView">
         <attr name="color_alpha" format="integer" />
         <attr name="visible_arrow" format="boolean" />
+        <attr name="show_color_count" format="integer" />
     </declare-styleable>
 </resources>

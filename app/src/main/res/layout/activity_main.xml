@@ -22,5 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         sinhwa2k:color_alpha="100"
-        sinhwa2k:visible_arrow="true"/>
+        sinhwa2k:visible_arrow="true"
+        sinhwa2k:show_color_count="9"/>
 </LinearLayout>

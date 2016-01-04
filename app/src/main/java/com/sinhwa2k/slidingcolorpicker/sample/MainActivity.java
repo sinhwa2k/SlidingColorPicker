@@ -3,6 +3,7 @@ package com.sinhwa2k.slidingcolorpicker.sample;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.sinhwa2k.slidingcolorpicker.ColorPickerView;
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements OnColorChange {
     }
 
     @Override
-    public void changeColor(int color) {
-        tvTitle.setBackgroundColor(color);
+    public void changeColor(String color) {
+        Log.v("SlidingColorPicker", color);
+        tvTitle.setBackgroundColor(Color.parseColor(color));
     }
+
 }

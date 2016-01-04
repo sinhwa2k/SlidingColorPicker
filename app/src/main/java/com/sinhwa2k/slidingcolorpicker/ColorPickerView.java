@@ -29,10 +29,10 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	Paint paintBg;
 	Paint paintCenter;
+	ArrayList<String> arColor;
 	ArrayList<Paint> arPaintColor;
-	ArrayList<Paint> arPaintColorAlpha10;
-	int colorCount = 15;
-	int showColorCount = 9;
+	int colorCount = 0;
+	int showColorCount = 0;
 	int centerIdx = 0; //센터 칼라
 
 	int startIdx = 6;
@@ -79,7 +79,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	public void setOnColorChange(OnColorChange onColorChange) {
 		this.onColorChange = onColorChange;
-		onColorChange.changeColor(arPaintColor.get(centerIdx).getColor());
+		onColorChange.changeColor(arColor.get(centerIdx));
 	}
 
 	@Override
@@ -117,6 +117,8 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 		colorAlpha =  context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getInt( R.styleable.ColorPickerView_color_alpha, 255);
 		visibleArrow = context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getBoolean( R.styleable.ColorPickerView_visible_arrow, true);
+		showColorCount = context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getInt( R.styleable.ColorPickerView_show_color_count, 9);
+
         bitmapLeft = BitmapFactory.decodeResource(getResources(), R.mipmap.picker_ic_left);
         bitmapRight = BitmapFactory.decodeResource(getResources(), R.mipmap.picker_ic_right);
         leftRect = new Rect();
@@ -129,9 +131,9 @@ public class ColorPickerView extends View implements OnGestureListener {
 		paintCenter.setColor(getResources().getColor(android.R.color.black));
 		paintCenter.setStrokeWidth(4);
 
-		arPaintColor = new ArrayList<Paint>();
-		arPaintColorAlpha10 = new ArrayList<Paint>();
-	
+		arColor = new ArrayList<>();
+		arPaintColor = new ArrayList<>();
+
 		addColor("#f9552e");
 		addColor("#ff7800");
 		addColor("#ffb400");
@@ -158,14 +160,14 @@ public class ColorPickerView extends View implements OnGestureListener {
 	}
 
 	private void addColor(String color) {
+
+		arColor.add(color);
+		colorCount = arColor.size();
+
 		Paint p = new Paint();
 		p.setColor(Color.parseColor(color));
-		arPaintColor.add(p);
-
-		p = new Paint();
-		p.setColor(Color.parseColor(color));
 		p.setAlpha(colorAlpha);
-		arPaintColorAlpha10.add(p);
+		arPaintColor.add(p);
 	}
 
 	private void calculate() {
@@ -241,8 +243,9 @@ public class ColorPickerView extends View implements OnGestureListener {
 			break;
 		}
 
-		if(onColorChange != null)
-			onColorChange.changeColor(arPaintColor.get(centerIdx).getColor());
+		if(onColorChange != null) {
+			onColorChange.changeColor(arColor.get(centerIdx));
+		}
 	}
 
 	@Override
@@ -258,12 +261,12 @@ public class ColorPickerView extends View implements OnGestureListener {
 		//스크롤 이동
 		canvas.translate(-dX - moveLeft, 0);
 
-		canvas.drawRect(colorRect, arPaintColorAlpha10.get(startIdx));
+		canvas.drawRect(colorRect, arPaintColor.get(startIdx));
 
 		for(int i = 0; i < colorCount - 1; i ++) {
 			int idx = (startIdx + 1 + i) % colorCount;
 			canvas.translate(colorW, 0);
-			canvas.drawRect(colorRect, arPaintColorAlpha10.get(idx));
+			canvas.drawRect(colorRect, arPaintColor.get(idx));
 		}
 
 		canvas.restore();
