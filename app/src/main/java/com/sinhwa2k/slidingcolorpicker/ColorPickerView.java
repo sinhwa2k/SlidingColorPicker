@@ -27,12 +27,10 @@ public class ColorPickerView extends View implements OnGestureListener {
 	OnColorChange onColorChange = null;
 	GestureDetector mGestureDetector;
 
-	Paint paintBg;
 	Paint paintCenter;
 	ArrayList<String> arColor;
 	ArrayList<Paint> arPaintColor;
 	int colorCount = 0;
-	int showColorCount = 0;
 	int centerIdx = 0; //센터 칼라
 
 	int startIdx = 6;
@@ -45,7 +43,6 @@ public class ColorPickerView extends View implements OnGestureListener {
 	float moveLeft;
 	float colorW;
 	float colorHalfW;
-	int colorH;
 	int width;
 	int height;
 	int centerX;
@@ -62,12 +59,13 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	int colorAlpha;
 	boolean visibleArrow;
+	boolean visibleCenterLine;
+	int showColorCount = 0;
 
 	public ColorPickerView(Context context, AttributeSet attrs, int defStyle ) {
 		super( context, attrs, defStyle );
 		init( context, attrs, defStyle );
 	}
-
 
 	public ColorPickerView(Context context, AttributeSet attrs ) {
 		this( context, attrs, 0 );
@@ -91,32 +89,24 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 		colorW = width / (float)showColorCount;
 		colorHalfW = colorW / 2;
-		colorH = height;
 
 		colorDx = colorHalfW;
 
-		colorRect.set(0, 0, (int)colorW+1, colorH);
+		colorRect.set(0, 0, (int)colorW+1, height);
 
         leftRect.set(0, height /2 - 44, 26, height /2 + 44);
         rightRect.set(width - 26, height /2 - 44, width, height /2 + 44);
 
-		moveLeft = (colorW) * 5;
+		moveLeft = (colorW) * ((showColorCount / 2) + 1);
 		centerX = width/2;
 	}
 
-	public void setInitColor(int colorIdx) {
-		centerIdx = colorIdx;
-		startIdx = centerIdx - 9;
-
-		if(startIdx < 0 ) startIdx = colorCount + startIdx;
-		else startIdx = startIdx % colorCount;
-        invalidate();
-	}
 
 	private void init(Context context, AttributeSet attrs, int defStyle) {
 
 		colorAlpha =  context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getInt( R.styleable.ColorPickerView_color_alpha, 255);
 		visibleArrow = context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getBoolean( R.styleable.ColorPickerView_visible_arrow, true);
+		visibleCenterLine = context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getBoolean( R.styleable.ColorPickerView_visible_center_line, true);
 		showColorCount = context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getInt( R.styleable.ColorPickerView_show_color_count, 9);
 
         bitmapLeft = BitmapFactory.decodeResource(getResources(), R.mipmap.picker_ic_left);
@@ -124,31 +114,12 @@ public class ColorPickerView extends View implements OnGestureListener {
         leftRect = new Rect();
         rightRect = new Rect();
 
-		paintBg = new Paint();
-		paintBg.setColor(getResources().getColor(android.R.color.white));
-
 		paintCenter = new Paint();
 		paintCenter.setColor(getResources().getColor(android.R.color.black));
 		paintCenter.setStrokeWidth(4);
 
 		arColor = new ArrayList<>();
 		arPaintColor = new ArrayList<>();
-
-		addColor("#f9552e");
-		addColor("#ff7800");
-		addColor("#ffb400");
-		addColor("#6cd128");
-		addColor("#07b017");
-		addColor("#00b37e");
-		addColor("#33cccc");
-		addColor("#0066ff");
-		addColor("#0c74a5");
-		addColor("#6075de");
-		addColor("#ce5bf5");
-		addColor("#9e37e3");
-		addColor("#fa53a7");
-		addColor("#9a8170");
-		addColor("#996600");
 
 		colorRect =  new Rect();
 
@@ -159,7 +130,13 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	}
 
-	private void addColor(String color) {
+	public void addColor(String color[]) {
+		for(String c : color) {
+			addColor(c);
+		}
+	}
+
+	public void addColor(String color) {
 
 		arColor.add(color);
 		colorCount = arColor.size();
@@ -172,7 +149,6 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	private void calculate() {
 
-		//칼라체크
 		if(colorDx > colorW) {
 			colorDx -= colorW;
 			changeColor(COLOR_IDX_UP);
@@ -181,8 +157,6 @@ public class ColorPickerView extends View implements OnGestureListener {
 			changeColor(COLOR_IDX_DOWN);
 		}
 
-
-
 		if(dX > colorW) {
 			startIdx++;
 			dX -= colorW;
@@ -190,9 +164,10 @@ public class ColorPickerView extends View implements OnGestureListener {
 		} else if(dX < -colorW) {
 			startIdx--;
 			dX += colorW;
-			if(startIdx < 0 ) startIdx = colorCount - 1;
+			if(startIdx < 0 ) {
+				startIdx = colorCount - 1;
+			}
 		}
-
 
 		if(startGoCenter) {
 			if(dX > colorHalfW) {
@@ -214,8 +189,6 @@ public class ColorPickerView extends View implements OnGestureListener {
 			startGoCenter = false;
 
 		} else if (doGoCenter) {
-
-			//마지막
 			if(centerDx <= ADD_DX ) {
 				if(addDx < 0) addDx = -centerDx;
 				else addDx = centerDx;
@@ -252,15 +225,10 @@ public class ColorPickerView extends View implements OnGestureListener {
 	protected void onDraw( Canvas canvas ) {
 		super.onDraw( canvas );
 
-		canvas.drawPaint( paintBg );
-
 		calculate();
 
-
 		canvas.save();
-		//스크롤 이동
 		canvas.translate(-dX - moveLeft, 0);
-
 		canvas.drawRect(colorRect, arPaintColor.get(startIdx));
 
 		for(int i = 0; i < colorCount - 1; i ++) {
@@ -270,13 +238,15 @@ public class ColorPickerView extends View implements OnGestureListener {
 		}
 
 		canvas.restore();
-		canvas.drawLine(centerX, 0, centerX, height, paintCenter);
+
+		if(visibleCenterLine) {
+			canvas.drawLine(centerX, 0, centerX, height, paintCenter);
+		}
 
 		if(visibleArrow) {
 			canvas.drawBitmap(bitmapLeft, null, leftRect, null);
 			canvas.drawBitmap(bitmapRight, null, rightRect, null);
 		}
-
 
 		if(startGoCenter || doGoCenter) {
 			invalidate();
@@ -300,12 +270,10 @@ public class ColorPickerView extends View implements OnGestureListener {
 		return true;
 	}
 
-
 	@Override
 	public void onShowPress(MotionEvent e) {
 
 	}
-
 
 	@Override
 	public boolean onSingleTapUp(MotionEvent e) {
@@ -324,8 +292,6 @@ public class ColorPickerView extends View implements OnGestureListener {
 		getParent().requestDisallowInterceptTouchEvent( true );
 		dX += distanceX;
 		colorDx += distanceX;
-
-
 		invalidate();
 		return true;
 	}
@@ -333,17 +299,14 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	@Override
 	public void onLongPress(MotionEvent e) {
-		// TODO Auto-generated method stub
 
 	}
-
 
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 						   float velocityY) {
 		return false;
 	}
-
 
 
 
