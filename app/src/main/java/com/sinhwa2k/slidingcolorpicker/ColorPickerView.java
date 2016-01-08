@@ -308,6 +308,36 @@ public class ColorPickerView extends View implements OnGestureListener {
 		return false;
 	}
 
+	public ArrayList<String> getColorList() {
+		return arColor;
+	}
 
+	public boolean isVisibleCenterLine() {
+		return visibleCenterLine;
+	}
+
+	public void setVisibleCenterLine(boolean visibleCenterLine) {
+		this.visibleCenterLine = visibleCenterLine;
+	}
+
+	public boolean isVisibleArrow() {
+		return visibleArrow;
+	}
+
+	public void setVisibleArrow(boolean visibleArrow) {
+		this.visibleArrow = visibleArrow;
+	}
+
+	public int getColorAlpha() {
+		return colorAlpha;
+	}
+
+	public void setColorAlpha(int colorAlpha) {
+		this.colorAlpha = colorAlpha;
+
+		for(Paint p : arPaintColor) {
+			p.setAlpha(colorAlpha);
+		}
+	}
 
 }
