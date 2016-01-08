@@ -26,4 +26,22 @@
         sinhwa2k:visible_arrow="true"
         sinhwa2k:visible_center_line="true"
         sinhwa2k:show_color_count="9"/>
+
+    <Button
+        android:id="@+id/MainActivity_btnToggleArrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toggle Arrow"/>
+
+    <Button
+        android:id="@+id/MainActivity_btnToggleCenterLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toggle Center Line"/>
+
+    <Button
+        android:id="@+id/MainActivity_btnGetCenterColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Center Color"/>
 </LinearLayout>

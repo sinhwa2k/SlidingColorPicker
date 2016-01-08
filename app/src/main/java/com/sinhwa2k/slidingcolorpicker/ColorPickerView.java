@@ -318,6 +318,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	public void setVisibleCenterLine(boolean visibleCenterLine) {
 		this.visibleCenterLine = visibleCenterLine;
+		invalidate();
 	}
 
 	public boolean isVisibleArrow() {
@@ -326,6 +327,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 
 	public void setVisibleArrow(boolean visibleArrow) {
 		this.visibleArrow = visibleArrow;
+		invalidate();
 	}
 
 	public int getColorAlpha() {
@@ -338,6 +340,10 @@ public class ColorPickerView extends View implements OnGestureListener {
 		for(Paint p : arPaintColor) {
 			p.setAlpha(colorAlpha);
 		}
+	}
+
+	public String getCenterColor() {
+		return arColor.get(centerIdx);
 	}
 
 }
