@@ -321,19 +321,40 @@ public class ColorPickerView extends View implements OnGestureListener {
 		invalidate();
 	}
 
+	/**
+	 * get the visibility of arrow
+	 *
+	 *	@return visibility of arrow
+	 */
 	public boolean isVisibleArrow() {
 		return visibleArrow;
 	}
 
+	/**
+	 * set the visibility of arrow
+	 *
+	 * @param a visibility of arrow
+	 */
 	public void setVisibleArrow(boolean visibleArrow) {
 		this.visibleArrow = visibleArrow;
 		invalidate();
 	}
 
+	/**
+	 * get the display color alpha
+	 *
+	 *	@return value of the display color alpha of the range [0..255]
+	*/
 	public int getColorAlpha() {
 		return colorAlpha;
 	}
 
+	/**
+	 * set the display color alpha
+	 * value is outside of the range [0..255]
+	 *
+	 * @param a set the alpha component [0..255] of the display color.
+	 */
 	public void setColorAlpha(int colorAlpha) {
 		this.colorAlpha = colorAlpha;
 
@@ -342,6 +363,11 @@ public class ColorPickerView extends View implements OnGestureListener {
 		}
 	}
 
+	/**
+	 * get the value of display color at center
+	 *
+	 * @return the value of display color at center
+	 */
 	public String getCenterColor() {
 		return arColor.get(centerIdx);
 	}
