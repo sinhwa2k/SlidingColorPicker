@@ -33,7 +33,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 	int colorCount = 0;
 	int centerIdx = 0; //센터 칼라
 
-	int startIdx = 6;
+	int startIdx;
 
 	float dX = 0f; //현재 스크롤 dx
 	float colorDx = 0f; //현재 색상 추출용
@@ -102,6 +102,7 @@ public class ColorPickerView extends View implements OnGestureListener {
 	}
 
 
+
 	private void init(Context context, AttributeSet attrs, int defStyle) {
 
 		colorAlpha =  context.obtainStyledAttributes( attrs, R.styleable.ColorPickerView ).getInt( R.styleable.ColorPickerView_color_alpha, 255);
@@ -145,6 +146,9 @@ public class ColorPickerView extends View implements OnGestureListener {
 		p.setColor(Color.parseColor(color));
 		p.setAlpha(colorAlpha);
 		arPaintColor.add(p);
+
+		//TODO: calculate start idx
+		startIdx = colorCount - showColorCount;
 	}
 
 	private void calculate() {
@@ -212,7 +216,9 @@ public class ColorPickerView extends View implements OnGestureListener {
 			break;
 		case COLOR_IDX_DOWN:
 			centerIdx --;
-			if(centerIdx < 0) centerIdx = colorCount -1;
+			if(centerIdx < 0) {
+				centerIdx = colorCount - 1;
+			}
 			break;
 		}
 
