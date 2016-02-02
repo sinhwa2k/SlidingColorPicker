@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">SlidingColorPicker</string>
+
+    <string-array name="colors">
+        <item>#f9552e</item>
+        <item>#ff7800</item>
+        <item>#ffb400</item>
+        <item>#6cd128</item>
+        <item>#07b017</item>
+        <item>#00b37e</item>
+        <item>#33cccc</item>
+        <item>#0066ff</item>
+        <item>#0c74a5</item>
+        <item>#6075de</item>
+        <item>#ce5bf5</item>
+        <item>#9e37e3</item>
+        <item>#fa53a7</item>
+        <item>#9a8170</item>
+        <item>#996600</item>
+    </string-array>
 </resources>

@@ -29,11 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnColorChange, Vi
         tvTitle = (TextView)findViewById(R.id.MainActivity_tvTitle);
 
         cpv = (ColorPickerView)findViewById(R.id.MainActivity_cpv);
-        cpv.addColor(new String[] {
-                "#f9552e","#ff7800","#ffb400","#6cd128","#07b017",
-                "#00b37e","#33cccc","#0066ff","#0c74a5","#6075de",
-                "#ce5bf5","#9e37e3","#fa53a7","#9a8170","#996600"
-        });
+        cpv.addColor(getResources().getStringArray(R.array.colors));
         cpv.setOnColorChange(this);
 
         btnToggleArrow = (Button)findViewById(R.id.MainActivity_btnToggleArrow);
